@@ -42,7 +42,7 @@ cnn_train = train_data.astype('float32')/255
 cnn_train_labels = np_utils.to_categorical(train_labels, 2)
 cnn_test = test_data.astype('float32')/255
 cnn_test_labels = np_utils.to_categorical(test_labels, 2)
-'''
+
 def accuracy(test_x, test_y, model):
     result = model.predict(test_x)
     predicted_class = np.argmax(result, axis=1)
@@ -90,7 +90,7 @@ end = time.time()
 print("Model took %0.2f seconds to train"%(end - start))
 print("Accuracy on test data is: " + str(accuracy(cnn_test, cnn_test_labels, model)))
 
-'''
+
 dr_train = np.sum(train_data.astype('float32')/255, axis = 3).reshape(train_data.shape[0],1024)
 dr_train_labels = np_utils.to_categorical(train_labels, 2)
 dr_test = np.sum(test_data.astype('float32')/255, axis = 3).reshape(test_data.shape[0], 1024)
@@ -127,7 +127,7 @@ def show_rand_reconstruction(cls):
   plt.imshow(np.repeat(s,3).reshape(32,32,3))
   plt.show()
 
-'''
+
 model2 = Sequential()
 
 model2.add(Dense(50, input_dim = 25, activation = 'relu'))
@@ -142,4 +142,4 @@ end = time.time()
 
 print("Model took %0.2f seconds to train"%(end - start))
 print("Accuracy on test data is: "+ str(accuracy(t_test, dr_test_labels, model2)))
-'''
+
