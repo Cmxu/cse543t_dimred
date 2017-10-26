@@ -50,7 +50,7 @@ def accuracy(test_x, test_y, model):
     num_correct = np.sum(predicted_class == true_class) 
     accuracy = float(num_correct)/result.shape[0]
     return (accuracy * 100)
-
+'''
 model = Sequential()
 model.add(Conv2D(32, (3, 3), padding='same',
                  input_shape=cnn_train.shape[1:]))
@@ -89,7 +89,7 @@ end = time.time()
 
 print("Model took %0.2f seconds to train"%(end - start))
 print("Accuracy on test data is: " + str(accuracy(cnn_test, cnn_test_labels, model)))
-
+'''
 
 dr_train = np.sum(train_data.astype('float32')/255, axis = 3).reshape(train_data.shape[0],1024)
 dr_train_labels = np_utils.to_categorical(train_labels, 2)
@@ -127,7 +127,7 @@ def show_rand_reconstruction(cls):
   plt.imshow(np.repeat(s,3).reshape(32,32,3))
   plt.show()
 
-
+'''
 model2 = Sequential()
 
 model2.add(Dense(50, input_dim = 25, activation = 'relu'))
@@ -142,4 +142,4 @@ end = time.time()
 
 print("Model took %0.2f seconds to train"%(end - start))
 print("Accuracy on test data is: "+ str(accuracy(t_test, dr_test_labels, model2)))
-
+'''
