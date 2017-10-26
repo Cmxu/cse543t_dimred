@@ -9,7 +9,7 @@ print("Initial Space")
 
 print(X)
 
-cov = np.cov(X.T * X)
+cov = X.T * X
 
 D,V = np.linalg.eig(cov)
 
