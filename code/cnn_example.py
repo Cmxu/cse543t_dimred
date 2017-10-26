@@ -36,13 +36,13 @@ test_labels = test_labels[perm_test]
 def show_rand_class(cls):
 	ind = np.random.choice(np.where(train_labels == cls)[0])
 	plt.imshow(train_data[ind])
-	plt.show
+	plt.show()
 
 cnn_train = train_data.astype('float32')/255
 cnn_train_labels = np_utils.to_categorical(train_labels, 2)
 cnn_test = test_data.astype('float32')/255
 cnn_test_labels = np_utils.to_categorical(test_labels, 2)
-
+'''
 def accuracy(test_x, test_y, model):
     result = model.predict(test_x)
     predicted_class = np.argmax(result, axis=1)
@@ -90,7 +90,7 @@ end = time.time()
 print("Model took %0.2f seconds to train"%(end - start))
 print("Accuracy on test data is: " + str(accuracy(cnn_test, cnn_test_labels, model)))
 
-
+'''
 dr_train = np.sum(train_data.astype('float32')/255, axis = 3).reshape(train_data.shape[0],1024)
 dr_train_labels = np_utils.to_categorical(train_labels, 2)
 dr_test = np.sum(test_data.astype('float32')/255, axis = 3).reshape(test_data.shape[0], 1024)
@@ -111,6 +111,23 @@ print("Preserved Variance: " + str(np.sum(D1)/np.sum(D)))
 t_train = np.matmul(dr_train, V1)
 t_test = np.matmul(dr_test, V1)
 
+def show_rand_reconstruction(cls):
+  ind = np.random.choice(np.where(train_labels == cls)[0])
+  fig = plt.figure()
+  ax = fig.add_subplot(1, 3, 1, xticks=[], yticks=[])
+  ax.set_title('Original Image')
+  plt.imshow(train_data[ind])
+  ax = fig.add_subplot(1, 3, 2, xticks=[], yticks=[])
+  ax.set_title('Black-White Image')
+  plt.imshow(np.repeat(np.sum(train_data[ind]/3, axis = 2), 3).reshape(32,32,3).astype('uint8'))
+  ax = fig.add_subplot(1, 3, 3, xticks=[], yticks=[])
+  ax.set_title('Reconstructed Image')
+  s = np.matmul(t_train[ind]/3, V1.T)
+  #s = (s - np.min(s))/(np.max(s) - np.min(s))
+  plt.imshow(np.repeat(s,3).reshape(32,32,3))
+  plt.show()
+
+'''
 model2 = Sequential()
 
 model2.add(Dense(50, input_dim = 25, activation = 'relu'))
@@ -125,3 +142,4 @@ end = time.time()
 
 print("Model took %0.2f seconds to train"%(end - start))
 print("Accuracy on test data is: "+ str(accuracy(t_test, dr_test_labels, model2)))
+'''
